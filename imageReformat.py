@@ -23,9 +23,9 @@ fontsize = 36
 # if '字体大小' in props:
 #     fontsize = int(props['字体大小'])
 
-filter = ['装饰表情','拉伸']
+filter = ['拉伸','装饰表情','拉伸']
 # filter = ['反转','局部模糊','装饰表情','拉伸']
-filterCount = 2
+filterCount = 3
 
 if filterCount > len(filter):
     print('filterCount should <= %d' % len(filter))

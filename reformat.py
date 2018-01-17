@@ -14,12 +14,13 @@ if os.path.exists('dist'):
     shutil.rmtree('dist')
 os.mkdir('dist')
 
-a = 1
+a = 0
 
-def filter(frame):
+def filter(gf,t):
+    print(t)
+    frame=gf(t)
     global a
     a+=1
-    print(frame)
     print(len(frame))
     return frame
 
@@ -29,12 +30,11 @@ for file in os.listdir('reformat'):
         print('pass hidden file %s' % file)
         continue
     videoclip = VideoFileClip(os.path.join('reformat',file), resize_algorithm = 'bilinear')
-    videoclip.fl_image(filter)
+    videoclip.fl(filter,apply_to='mask')
     index=0
     for frame in videoclip.iter_frames():
         index +=1
     print('index=',index)
-    print(len(videoclip.get_frame(5)))
     # videoclip = videoclip.set_position(("center","center"))
     # print('ori:',videoclip.size)
     # if videoclip.size[1]/videoclip.size[0] > finalSize[1]/finalSize[0]:
