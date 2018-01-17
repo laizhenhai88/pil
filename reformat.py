@@ -14,38 +14,25 @@ if os.path.exists('dist'):
     shutil.rmtree('dist')
 os.mkdir('dist')
 
-a = 0
-
-def filter(gf,t):
-    print(t)
-    frame=gf(t)
-    global a
-    a+=1
-    print(len(frame))
-    return frame
-
 finalSize = (1080,1920)
-for file in os.listdir('reformat'):
-    if file.find('.') == 0:
-        print('pass hidden file %s' % file)
-        continue
-    videoclip = VideoFileClip(os.path.join('reformat',file), resize_algorithm = 'bilinear')
-    videoclip.fl(filter,apply_to='mask')
-    index=0
-    for frame in videoclip.iter_frames():
-        index +=1
-    print('index=',index)
-    # videoclip = videoclip.set_position(("center","center"))
-    # print('ori:',videoclip.size)
-    # if videoclip.size[1]/videoclip.size[0] > finalSize[1]/finalSize[0]:
-    #     # 说明H大，同步H
-    #     videoclip = videoclip.resize((videoclip.size[0]*finalSize[1]/videoclip.size[1],finalSize[1]))
-    # else:
-    #     # 说明W大，同步W
-    #     videoclip = videoclip.resize((finalSize[0],videoclip.size[1]*finalSize[0]/videoclip.size[0]))
-    # print('new:',videoclip.size)
-    # videoclip = CompositeVideoClip([videoclip], size=finalSize)
-    # tempFile = str(uuid.uuid4()) + '.mov'
-    # videoclip.write_videofile('dist/'+tempFile,fps=30,codec='libx264',audio_codec='aac',ffmpeg_params=['-ac','1'],verbose=False)
-
-print('a=',a)
+for i in range(5):
+    os.mkdir('dist/'+str(i))
+    for file in os.listdir('reformat'):
+        if file.find('.') == 0:
+            print('pass hidden file %s' % file)
+            continue
+        videoclip = VideoFileClip(os.path.join('reformat',file), resize_algorithm = 'bilinear')
+        videoclip = videoclip.set_position(("center","center"))
+        print('ori:',videoclip.size)
+        if videoclip.size[1]/videoclip.size[0] > finalSize[1]/finalSize[0]:
+            # 说明H大，同步H
+            videoclip = videoclip.resize((videoclip.size[0]*finalSize[1]/videoclip.size[1],finalSize[1]))
+        else:
+            # 说明W大，同步W
+            videoclip = videoclip.resize((finalSize[0],videoclip.size[1]*finalSize[0]/videoclip.size[0]))
+        print('new:',videoclip.size)
+        saveSize = videoclip.size
+        videoclip = videoclip.crop(x1=i,y1=i,x2=saveSize[0]-2*i,y2=saveSize[1]-2*i).resize(saveSize)
+        videoclip = CompositeVideoClip([videoclip], size=finalSize)
+        tempFile = str(uuid.uuid4()) + '.mov'
+        videoclip.write_videofile('dist/'+str(i)+'/'+tempFile,fps=30,codec='libx264',audio_codec='aac',ffmpeg_params=['-ac','1'],verbose=False)
