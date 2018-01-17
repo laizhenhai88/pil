@@ -23,9 +23,9 @@ fontsize = 36
 # if '字体大小' in props:
 #     fontsize = int(props['字体大小'])
 
-filter = ['局部模糊','装饰表情','拉伸']
+filter = ['装饰表情','拉伸']
 # filter = ['反转','局部模糊','装饰表情','拉伸']
-filterCount = 3
+filterCount = 2
 
 if filterCount > len(filter):
     print('filterCount should <= %d' % len(filter))
@@ -100,4 +100,3 @@ for i in range(len(ptt)):
                 print ('没有这个过滤器 %s' % f)
         im = im.convert('RGB')
         im.save(os.path.join('dist', str(i), str(uuid.uuid4()) + '.jpg'), 'jpeg')
-        
