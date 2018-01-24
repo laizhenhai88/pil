@@ -23,7 +23,7 @@ fontsize = 36
 # if '字体大小' in props:
 #     fontsize = int(props['字体大小'])
 
-filter = ['拉伸','装饰表情','拉伸']
+filter = ['拉伸','none','拉伸']
 # filter = ['反转','局部模糊','装饰表情','拉伸']
 filterCount = 3
 
