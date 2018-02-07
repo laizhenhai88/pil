@@ -75,7 +75,7 @@ for i in range(len(ptt)):
         # 提前旋转并裁剪，确保基础图片差异比较大
         u = random.randint(10,20)
         w,h = im.size
-        im = im.rotate(1).crop((u,u,w-u,h-u))
+        # im = im.rotate(1).crop((u,u,w-u,h-u))
         for f in imgUnit['filters'][i]:
             if f == '反转':
                 im = im.transpose(Image.FLIP_LEFT_RIGHT)
