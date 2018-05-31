@@ -22,6 +22,8 @@ if not os.path.exists('image'):
     print('image不存在')
     exit(0)
 
+def rndColor():
+    return (random.randint(64, 255), random.randint(64, 255), random.randint(64, 255))
 
 for file in os.listdir('image'):
     if file.find('.') == 0:
@@ -29,6 +31,10 @@ for file in os.listdir('image'):
         continue
     im = Image.open(os.path.join('image', file))
     w,h = im.size
+    x = random.randint(1,w)
+    y = random.randint(1,h)
+    draw = ImageDraw.Draw(im)
+    draw.point((x,y),fill=rndColor())
     u1 = random.randint(1,10)
     u2 = random.randint(1,10)
     im = im.crop((0,0,w-u1,h-u2)).convert('RGB')
