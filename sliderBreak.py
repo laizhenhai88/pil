@@ -323,9 +323,9 @@ def sliderBreak(file):
 
     if DEBUG:
         im.save('dist/'+os.path.basename(file + '.jpg'))
-    else:
-        im = im.resize((350,200))
-        # im.save(file+'-result.jpg')
+#    else:
+#        im = im.resize((350,200))
+#        im.save(file+'-result.jpg')
 
     return distance
 
