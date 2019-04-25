@@ -1,10 +1,10 @@
 # coding=utf-8
 
-import os,shutil
+import os,shutil,math
 from sys import argv
 from PIL import Image, ImageDraw, ImageFont, ImageFilter, ImageColor
 
-DEBUG = False
+DEBUG = True
 def log(*args):
     if DEBUG:
         print(*args)
@@ -315,11 +315,13 @@ def sliderBreak(file):
 
     log('y1,y2:', y1,y2)
     log('x1,x2:', x1,x2)
-    print(distance)
+    yMiddle = math.floor((y1+y2)/2) - 480
+    print(str(distance) + ',' + str(yMiddle))
 
     draw = ImageDraw.Draw(im)
     draw.line([(i[0]-190,i[1]-480) for i in [(x1,y1),(x2,y1),(x2,y2),(x1,y2),(x1,y1)]], 'blue', 4)
     draw.line([(i[0]-190,i[1]-480) for i in [(206,y1),(378,y1),(378,y2),(206,y2),(206,y1)]], 'blue', 4)
+    draw.line([(0,yMiddle),(300,yMiddle)], 'blue', 4)
 
     if DEBUG:
         im.save('dist/'+os.path.basename(file + '.jpg'))
